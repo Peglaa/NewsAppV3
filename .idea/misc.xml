@@ -3,7 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/NewsAppV3/app/src/main/res/layout/acitvity_news.xml" value="0.18802083333333333" />
         <entry key="..\:/AndroidProjects/NewsAppV3/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
+        <entry key="..\:/AndroidProjects/NewsAppV3/app/src/main/res/layout/activity_news.xml" value="0.18802083333333333" />
+        <entry key="..\:/AndroidProjects/NewsAppV3/app/src/main/res/layout/fragment_latest_news.xml" value="0.358695652173913" />
+        <entry key="..\:/AndroidProjects/NewsAppV3/app/src/main/res/layout/fragment_news_article.xml" value="0.358695652173913" />
+        <entry key="..\:/AndroidProjects/NewsAppV3/app/src/main/res/layout/fragment_saved_news.xml" value="0.358695652173913" />
+        <entry key="..\:/AndroidProjects/NewsAppV3/app/src/main/res/layout/fragment_savved_news.xml" value="0.358695652173913" />
+        <entry key="..\:/AndroidProjects/NewsAppV3/app/src/main/res/layout/fragment_search_news.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidProjects/NewsAppV3/app/src/main/res/menu/bottom_nav_menu.xml" value="0.18697916666666667" />
       </map>
     </option>

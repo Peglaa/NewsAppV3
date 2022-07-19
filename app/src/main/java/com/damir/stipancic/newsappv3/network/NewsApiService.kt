@@ -21,9 +21,9 @@ interface NewsApiService {
                         @Query("apiKey") api_key: String = API_KEY): Response<NewsResponse>
 
     @GET("v2/everything")
-    suspend fun getNews(@Query("query") searchQuery: String,
-                        @Query("page") pageNumber: Int = 1,
-                        @Query("apiKey") api_key: String = API_KEY): Response<NewsResponse>
+    suspend fun getSearchedNews(@Query("query") searchQuery: String,
+                                @Query("page") pageNumber: Int = 1,
+                                @Query("apiKey") api_key: String = API_KEY): Response<NewsResponse>
 }
 
 object NewsApi {

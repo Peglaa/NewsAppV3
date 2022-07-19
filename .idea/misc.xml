@@ -12,7 +12,11 @@
         <entry key="..\:/AndroidProjects/NewsAppV3/app/src/main/res/layout/fragment_savved_news.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidProjects/NewsAppV3/app/src/main/res/layout/fragment_search_news.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidProjects/NewsAppV3/app/src/main/res/menu/bottom_nav_menu.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/stipa/AndroidStudioProjects/NewsAppV3/app/src/main/res/drawable/ic_broken_image.xml" value="0.1995" />
+        <entry key="..\:/Users/stipa/AndroidStudioProjects/NewsAppV3/app/src/main/res/drawable/ic_connection_error.xml" value="0.1995" />
+        <entry key="..\:/Users/stipa/AndroidStudioProjects/NewsAppV3/app/src/main/res/layout/fragment_article_details.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/stipa/AndroidStudioProjects/NewsAppV3/app/src/main/res/layout/fragment_latest_news.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/stipa/AndroidStudioProjects/NewsAppV3/app/src/main/res/layout/news_list_item.xml" value="0.25" />
       </map>
     </option>
   </component>

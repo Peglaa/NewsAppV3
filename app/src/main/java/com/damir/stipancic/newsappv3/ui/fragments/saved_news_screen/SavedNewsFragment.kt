@@ -1,4 +1,4 @@
-package com.damir.stipancic.newsappv3.ui.fragments
+package com.damir.stipancic.newsappv3.ui.fragments.saved_news_screen
 
 import android.os.Bundle
 import android.view.LayoutInflater

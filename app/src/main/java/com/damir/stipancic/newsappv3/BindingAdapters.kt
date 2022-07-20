@@ -5,6 +5,7 @@ import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.damir.stipancic.newsappv3.network.Article
 import com.damir.stipancic.newsappv3.ui.NewsRecyclerAdapter
@@ -23,8 +24,9 @@ fun bindImage(imgView: ImageView, imgUrl: String?){
             .load(imgUri)
             .apply(
                 RequestOptions()
-                .placeholder(R.drawable.loading_animation)
-                .error(R.drawable.ic_broken_image)
+                    .placeholder(R.drawable.loading_animation)
+                    .diskCacheStrategy(DiskCacheStrategy.DATA)
+                    .error(R.drawable.ic_broken_image)
             )
             .into(imgView)
     }

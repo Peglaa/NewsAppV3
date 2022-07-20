@@ -41,15 +41,15 @@ class LatestNewsViewModel : ViewModel(){
 
     private fun getLatestNews() {
         viewModelScope.launch {
+            try{
             _apiStatus.value = NewsApiStatus.LOADING
             val newsResponse = NewsApi.retrofitService.getNews()
-            if(newsResponse.isSuccessful){
                 newsResponse.body()?.let {
                     _apiStatus.value = NewsApiStatus.SUCCESSFUL
                     _articles.value = it.articles
                 }
             }
-            else {
+            catch(e: Exception) {
                 _apiStatus.value = NewsApiStatus.ERROR
                 _articles.value = ArrayList()
             }

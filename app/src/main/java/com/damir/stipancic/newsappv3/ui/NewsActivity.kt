@@ -2,6 +2,7 @@ package com.damir.stipancic.newsappv3.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -14,7 +15,14 @@ class NewsActivity : AppCompatActivity() {
 
         val binding = DataBindingUtil.setContentView<ActivityNewsBinding>(this, R.layout.activity_news)
         val navController = binding.newsNavHostFragment.getFragment<NavHostFragment>().navController
+        navController.addOnDestinationChangedListener{_, destination, _ ->
+            if (destination == navController.findDestination(R.id.articleDetailsFragment))
+                binding.bottomNavigationView.visibility = View.GONE
+            else
+                binding.bottomNavigationView.visibility = View.VISIBLE
+        }
 
         binding.bottomNavigationView.setupWithNavController(navController)
+
     }
 }

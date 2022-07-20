@@ -2,25 +2,56 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    
+    <data>
+        
+        <variable
+            name="viewModel"
+            type="com.damir.stipancic.newsappv3.ui.fragments.article_detail_screen.ArticleDetailViewModel" />
+    </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/article_detail_image"
+            android:layout_width="match_parent"
+            android:layout_height="232dp"
+            android:contentDescription="@string/article_detail_image"
+            app:imageUrl="@{viewModel.selectedArticle.urlToImage}"/>
 
         <TextView
+            android:id="@+id/article_detail_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="178dp"
-            android:layout_marginTop="356dp"
-            android:layout_marginEnd="179dp"
-            android:layout_marginBottom="356dp"
-            android:text="@string/details"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_margin="@dimen/margin"
+            android:textSize="@dimen/title_text_size"
+            android:textStyle="bold|italic"
+            android:textAllCaps="true"
+            tools:text="ARTICLE title"
+            android:textColor="@color/black"
+            android:text="@{viewModel.selectedArticle.title}"
+            />
+
+        <TextView
+            android:id="@+id/article_detail_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:textColor="@color/black"
+            android:text="@{viewModel.selectedArticle.description}"/>
+
+        <TextView
+            android:id="@+id/article_detail_src"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:autoLink="web"
+            android:text="@{viewModel.selectedArticle.url}"/>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </layout>

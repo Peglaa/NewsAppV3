@@ -21,7 +21,6 @@
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
-            android:padding="2dp"
             android:scaleType="centerCrop"
             app:imageUrl="@{article.urlToImage}"
             tools:src="@tools:sample/backgrounds/scenic"
@@ -33,6 +32,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             tools:text="Article Title"
+            android:textColor="@color/black"
             android:text="@{article.title}"
             />
 

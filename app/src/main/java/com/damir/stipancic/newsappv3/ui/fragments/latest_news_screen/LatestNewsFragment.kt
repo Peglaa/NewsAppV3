@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.damir.stipancic.newsappv3.databinding.FragmentLatestNewsBinding
 import com.damir.stipancic.newsappv3.ui.NewsRecyclerAdapter
 
@@ -27,9 +28,12 @@ class LatestNewsFragment : Fragment() {
             viewModel.displayArticleDetails(it)
         })
 
+        binding.latestNewsRecycler.addItemDecoration(DividerItemDecoration(binding.latestNewsRecycler.context, DividerItemDecoration.VERTICAL))
+
         viewModel.navigateToClickedArticle.observe(viewLifecycleOwner) {
             if (null != it) {
                 this.findNavController().navigate(LatestNewsFragmentDirections.showArticleDetails(it))
+
                 viewModel.displayArticleDetailsComplete()
             }
         }

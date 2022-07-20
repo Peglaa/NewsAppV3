@@ -5,4 +5,5 @@
     <string name="search_news">Search News</string>
     <string name="article_image">article_image</string>
     <string name="details">DETAILS</string>
+    <string name="article_detail_image">Article detail image</string>
 </resources>

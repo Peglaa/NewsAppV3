@@ -33,7 +33,7 @@
         android:name="com.damir.stipancic.newsappv3.ui.fragments.article_detail_screen.ArticleDetailsFragment"
         android:label="ArticleDetailsFragment" >
         <argument
-            android:name="selected_article"
-            app:argType="com.damir.stipancic.newsappv3.network.Article" />
+            android:name="selectedArticle"
+            app:argType="com.damir.stipancic.newsappv3.data.models.Article" />
     </fragment>
 </navigation>

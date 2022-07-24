@@ -1,5 +1,6 @@
-package com.damir.stipancic.newsappv3.network
+package com.damir.stipancic.newsappv3.data.network
 
+import com.damir.stipancic.newsappv3.data.models.NewsResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient

@@ -1,23 +1,26 @@
 package com.damir.stipancic.newsappv3.ui.fragments.latest_news_screen
 
+import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.damir.stipancic.newsappv3.network.Article
-import com.damir.stipancic.newsappv3.network.NewsApi
+import com.damir.stipancic.newsappv3.data.models.Article
+import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
+import com.damir.stipancic.newsappv3.data.network.NewsApi
 import kotlinx.coroutines.launch
 
 enum class NewsApiStatus {ERROR, SUCCESSFUL, LOADING}
 
-class LatestNewsViewModel : ViewModel(){
+class LatestNewsViewModel(val context : Application) : ViewModel(){
 
     // INTERNAL/EXTERNAL variables to track api status for UI changes
     private val _apiStatus = MutableLiveData<NewsApiStatus>()
     val apiStatus: LiveData<NewsApiStatus>
         get() = _apiStatus
 
-    //INTERNAL/EXTERNAL variables to store list of news
+    //INTERNAL/EXTERNAL variables to store list of news articles
     private val _articles = MutableLiveData<List<Article>>()
     val articles: LiveData<List<Article>>
         get() = _articles
@@ -40,20 +43,28 @@ class LatestNewsViewModel : ViewModel(){
     }
 
     private fun getLatestNews() {
+        val database = ArticleDatabase.getInstance(context)
         viewModelScope.launch {
             try{
             _apiStatus.value = NewsApiStatus.LOADING
             val newsResponse = NewsApi.retrofitService.getNews()
-                newsResponse.body()?.let {
+                newsResponse.body()?.let { response ->
                     _apiStatus.value = NewsApiStatus.SUCCESSFUL
-                    _articles.value = it.articles
+                    _articles.value = response.articles
+                    Log.d("latestNewsViewModel", "getLatestNews: SUCCESSFUL")
+                    _articles.value.let{ articleList ->
+                        articleList?.forEach{
+                            database.sleepDatabaseDao.insertArticle(it)
+                        }
+                    }
                 }
+                Log.d("latestNewsViewModel", "ROW_COUNT: ${database.sleepDatabaseDao.getRowCount()}")
             }
             catch(e: Exception) {
                 _apiStatus.value = NewsApiStatus.ERROR
                 _articles.value = ArrayList()
+                Log.d("latestNewsViewModel", "getLatestNews: ${e.message}")
             }
-
         }
     }
 }

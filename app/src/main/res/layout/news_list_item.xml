@@ -7,7 +7,7 @@
 
         <variable
             name="article"
-            type="com.damir.stipancic.newsappv3.network.Article" />
+            type="com.damir.stipancic.newsappv3.data.models.Article" />
 
     </data>
 

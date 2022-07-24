@@ -3,7 +3,7 @@ package com.damir.stipancic.newsappv3.ui.fragments.article_detail_screen
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.damir.stipancic.newsappv3.network.Article
+import com.damir.stipancic.newsappv3.data.models.Article
 
 class ArticleDetailViewModel(article: Article) : ViewModel() {
 

@@ -1,4 +1,4 @@
-package com.damir.stipancic.newsappv3.network
+package com.damir.stipancic.newsappv3.data.models
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

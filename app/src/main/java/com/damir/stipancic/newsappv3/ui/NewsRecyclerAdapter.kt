@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.damir.stipancic.newsappv3.databinding.NewsListItemBinding
-import com.damir.stipancic.newsappv3.network.Article
+import com.damir.stipancic.newsappv3.data.models.Article
 
 class NewsRecyclerAdapter (private val onClickListener: OnClickListener) :
     ListAdapter<Article, NewsRecyclerAdapter.NewsViewHolder>(DiffCallback) {

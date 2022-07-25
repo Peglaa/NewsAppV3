@@ -19,9 +19,15 @@ interface ArticleDao {
     @Query("SELECT * FROM articles")
     suspend fun getAllArticles(): List<Article>
 
+    @Query("SELECT * FROM articles ORDER BY createdAt DESC LIMIT 10")
+    suspend fun getLatestArticles(): List<Article>
+
     @Query("SELECT COUNT(id) FROM articles WHERE saved = false")
     suspend fun getUnsavedRowCount(): Int
 
     @Query("DELETE FROM articles WHERE id IN (SELECT id FROM articles WHERE saved = false ORDER BY createdAt ASC LIMIT 10)")
     suspend fun deleteNotNeededArticles()
+
+    @Query("SELECT * FROM articles ORDER BY createdAt DESC LIMIT 1")
+    suspend fun getLatestEntry(): Article
 }

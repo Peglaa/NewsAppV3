@@ -1,19 +1,17 @@
 package com.damir.stipancic.newsappv3.ui.fragments.latest_news_screen
 
-import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.damir.stipancic.newsappv3.data.models.Article
-import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
-import com.damir.stipancic.newsappv3.data.network.NewsApi
+import com.damir.stipancic.newsappv3.repository.NewsRepository
 import kotlinx.coroutines.launch
 
 enum class NewsApiStatus {ERROR, SUCCESSFUL, LOADING}
 
-class LatestNewsViewModel(val context : Application) : ViewModel(){
+class LatestNewsViewModel(private val repository : NewsRepository) : ViewModel(){
 
     // INTERNAL/EXTERNAL variables to track api status for UI changes
     private val _apiStatus = MutableLiveData<NewsApiStatus>()
@@ -43,28 +41,12 @@ class LatestNewsViewModel(val context : Application) : ViewModel(){
     }
 
     private fun getLatestNews() {
-        val database = ArticleDatabase.getInstance(context)
+        _apiStatus.value = NewsApiStatus.LOADING
         viewModelScope.launch {
             try{
-            _apiStatus.value = NewsApiStatus.LOADING
-            val newsResponse = NewsApi.retrofitService.getNews()
-                newsResponse.body()?.let { response ->
-                    _apiStatus.value = NewsApiStatus.SUCCESSFUL
-                    _articles.value = response.articles
-                    Log.d("latestNewsViewModel", "getLatestNews: SUCCESSFUL")
-                    _articles.value.let{ articleList ->
-                        articleList?.forEach{
-                            database.sleepDatabaseDao.insertArticle(it)
-                        }
-                    }
-                }
-                Log.d("latestNewsViewModel", "UNSAVED_ROW_COUNT: ${database.sleepDatabaseDao.getUnsavedRowCount()}")
-                if(database.sleepDatabaseDao.getUnsavedRowCount() >= 20)
-                    database.sleepDatabaseDao.deleteNotNeededArticles()
-                Log.d("latestNewsViewModel", "UNSAVED_ROW_COUNT_AFTER_DELETE: ${database.sleepDatabaseDao.getUnsavedRowCount()}")
-                database.sleepDatabaseDao.getAllArticles().forEach{
-                    Log.d("latestNewsViewModel", "TITLE: ${it.title}")
-                }
+                repository.refreshNews()
+                _articles.value = repository.getArticlesFromDB()
+                _apiStatus.value = NewsApiStatus.SUCCESSFUL
             }
             catch(e: Exception) {
                 _apiStatus.value = NewsApiStatus.ERROR

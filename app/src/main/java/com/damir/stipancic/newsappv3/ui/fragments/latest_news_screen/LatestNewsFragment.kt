@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
 import com.damir.stipancic.newsappv3.databinding.FragmentLatestNewsBinding
+import com.damir.stipancic.newsappv3.repository.NewsRepository
 import com.damir.stipancic.newsappv3.ui.NewsRecyclerAdapter
 import com.damir.stipancic.newsappv3.ui.fragments.article_detail_screen.ArticleDetailViewModel
 
@@ -17,10 +19,9 @@ class LatestNewsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
-        val application = requireActivity().application
-
+        val repository = NewsRepository(ArticleDatabase.getInstance(requireContext()))
         val binding = FragmentLatestNewsBinding.inflate(inflater)
-        val viewModelFactory = LatestNewsViewModelFactory(application)
+        val viewModelFactory = LatestNewsViewModelFactory(repository)
         val viewModel = ViewModelProvider(this, viewModelFactory)[LatestNewsViewModel::class.java]
 
         binding.lifecycleOwner = this

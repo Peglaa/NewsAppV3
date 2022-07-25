@@ -1,5 +1,6 @@
 package com.damir.stipancic.newsappv3.data.database
 
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy

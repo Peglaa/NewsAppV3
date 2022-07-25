@@ -40,4 +40,8 @@ class NewsRepository(private val database: ArticleDatabase) {
     suspend fun getArticlesFromDB(): List<Article> {
         return database.sleepDatabaseDao.getLatestArticles()
     }
+
+    suspend fun saveArticle(id: Long){
+        database.sleepDatabaseDao.saveArticle(id)
+    }
 }

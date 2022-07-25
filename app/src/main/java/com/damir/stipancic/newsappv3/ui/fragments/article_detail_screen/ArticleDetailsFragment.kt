@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
 import com.damir.stipancic.newsappv3.databinding.FragmentArticleDetailsBinding
+import com.damir.stipancic.newsappv3.repository.NewsRepository
 
 class ArticleDetailsFragment : Fragment() {
 
@@ -15,8 +17,9 @@ class ArticleDetailsFragment : Fragment() {
         binding.lifecycleOwner = this
 
         val article = ArticleDetailsFragmentArgs.fromBundle(arguments!!).selectedArticle
+        val repository = NewsRepository(ArticleDatabase.getInstance(requireContext()))
 
-        val viewModelFactory = ArticleDetailsViewModelFactory(article)
+        val viewModelFactory = ArticleDetailsViewModelFactory(article, repository)
 
         binding.viewModel = ViewModelProvider(this, viewModelFactory)[ArticleDetailViewModel::class.java]
 

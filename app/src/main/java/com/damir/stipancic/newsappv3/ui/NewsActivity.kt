@@ -25,10 +25,4 @@ class NewsActivity : AppCompatActivity() {
         binding.bottomNavigationView.setupWithNavController(navController)
 
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        //val database = ArticleDatabase.getInstance(this)
-        //database.clearAllTables()
-    }
 }

@@ -30,4 +30,7 @@ interface ArticleDao {
 
     @Query("SELECT * FROM articles ORDER BY createdAt DESC LIMIT 1")
     suspend fun getLatestEntry(): Article
+
+    @Query("UPDATE articles SET saved = true WHERE id = :id")
+    suspend fun saveArticle(id: Long)
 }

@@ -58,7 +58,13 @@ class LatestNewsViewModel(val context : Application) : ViewModel(){
                         }
                     }
                 }
-                Log.d("latestNewsViewModel", "ROW_COUNT: ${database.sleepDatabaseDao.getRowCount()}")
+                Log.d("latestNewsViewModel", "UNSAVED_ROW_COUNT: ${database.sleepDatabaseDao.getUnsavedRowCount()}")
+                if(database.sleepDatabaseDao.getUnsavedRowCount() >= 20)
+                    database.sleepDatabaseDao.deleteNotNeededArticles()
+                Log.d("latestNewsViewModel", "UNSAVED_ROW_COUNT_AFTER_DELETE: ${database.sleepDatabaseDao.getUnsavedRowCount()}")
+                database.sleepDatabaseDao.getAllArticles().forEach{
+                    Log.d("latestNewsViewModel", "TITLE: ${it.title}")
+                }
             }
             catch(e: Exception) {
                 _apiStatus.value = NewsApiStatus.ERROR

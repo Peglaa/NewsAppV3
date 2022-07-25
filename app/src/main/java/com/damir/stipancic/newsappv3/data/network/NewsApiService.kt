@@ -1,5 +1,6 @@
 package com.damir.stipancic.newsappv3.data.network
 
+import com.damir.stipancic.newsappv3.BuildConfig
 import com.damir.stipancic.newsappv3.data.models.NewsResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -13,7 +14,7 @@ import retrofit2.http.Query
 
 private const val BASE_URL = "https://newsapi.org/"
 private const val SOURCE = "bbc-news"
-private const val API_KEY = "390b39b88a9c4ea5a7e410de97866b61"
+private const val API_KEY = BuildConfig.API_KEY
 
 interface NewsApiService {
 

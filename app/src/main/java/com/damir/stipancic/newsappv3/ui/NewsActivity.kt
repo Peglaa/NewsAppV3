@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.damir.stipancic.newsappv3.R
-import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
 import com.damir.stipancic.newsappv3.databinding.ActivityNewsBinding
 
 class NewsActivity : AppCompatActivity() {

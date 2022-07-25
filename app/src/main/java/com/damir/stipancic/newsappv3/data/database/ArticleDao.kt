@@ -18,6 +18,9 @@ interface ArticleDao {
     @Query("SELECT * FROM articles")
     suspend fun getAllArticles(): List<Article>
 
-    @Query("SELECT COUNT(id) FROM articles")
-    suspend fun getRowCount(): Int
+    @Query("SELECT COUNT(id) FROM articles WHERE saved = false")
+    suspend fun getUnsavedRowCount(): Int
+
+    @Query("DELETE FROM articles WHERE id IN (SELECT id FROM articles WHERE saved = false ORDER BY createdAt ASC LIMIT 10)")
+    suspend fun deleteNotNeededArticles()
 }

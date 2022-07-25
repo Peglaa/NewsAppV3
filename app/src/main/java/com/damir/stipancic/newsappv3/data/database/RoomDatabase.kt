@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.*
 import com.damir.stipancic.newsappv3.data.models.Article
 
-@Database(entities = [Article::class], version = 2)
+@Database(entities = [Article::class], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class ArticleDatabase: RoomDatabase(){
 

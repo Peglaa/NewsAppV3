@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.NewsAppV3" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/orange</item>
-        <item name="colorPrimaryVariant">@color/dark_orange</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">#A30303</item>
+        <item name="colorPrimaryVariant">#7C0101</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#A30303</item>
         <item name="colorSecondaryVariant">#7C0101</item>
@@ -12,5 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <item name="android:textColor">#000000</item>
     </style>
 </resources>

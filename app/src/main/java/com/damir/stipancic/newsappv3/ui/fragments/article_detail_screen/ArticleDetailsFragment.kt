@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
 import com.damir.stipancic.newsappv3.databinding.FragmentArticleDetailsBinding
 import com.damir.stipancic.newsappv3.repository.NewsRepository
+import com.damir.stipancic.newsappv3.setBackStackData
 
 class ArticleDetailsFragment : Fragment() {
 
@@ -14,16 +15,26 @@ class ArticleDetailsFragment : Fragment() {
                               savedInstanceState: Bundle?): View {
 
         val binding = FragmentArticleDetailsBinding.inflate(inflater)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
         val article = ArticleDetailsFragmentArgs.fromBundle(arguments!!).selectedArticle
         val repository = NewsRepository(ArticleDatabase.getInstance(requireContext()))
 
         val viewModelFactory = ArticleDetailsViewModelFactory(article, repository)
+        val viewModel = ViewModelProvider(this, viewModelFactory)[ArticleDetailViewModel::class.java]
 
-        binding.viewModel = ViewModelProvider(this, viewModelFactory)[ArticleDetailViewModel::class.java]
+        binding.viewModel = viewModel
 
+        viewModel.updateRecyclerOnBack.observe(viewLifecycleOwner){
+            if(it) {
+                val updateRecyclerOnBack = true
+                setBackStackData("updateRecycler", updateRecyclerOnBack)
+            }
+        }
+        
         return binding.root
     }
+
+
 }
 

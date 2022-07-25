@@ -9,6 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#FF8C00</color>
     <color name="dark_orange">#AF6000</color>
-
+    <color name="saved_title_green">#127501</color>
 
 </resources>

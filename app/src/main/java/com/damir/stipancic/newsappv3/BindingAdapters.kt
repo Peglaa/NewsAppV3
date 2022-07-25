@@ -1,6 +1,8 @@
 package com.damir.stipancic.newsappv3
 
+import android.graphics.Color
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -30,4 +32,11 @@ fun bindImage(imgView: ImageView, imgUrl: String?){
             )
             .into(imgView)
     }
+}
+
+@BindingAdapter("articleTitle", "articleTitleColor")
+fun bindArticleTitle(txtView: TextView, title: String, saved: Boolean){
+    txtView.text = title
+    if(saved)
+        txtView.setTextColor(Color.parseColor("#127501"))
 }

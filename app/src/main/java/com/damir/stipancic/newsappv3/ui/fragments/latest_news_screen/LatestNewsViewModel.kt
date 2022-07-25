@@ -55,4 +55,10 @@ class LatestNewsViewModel(private val repository : NewsRepository) : ViewModel()
             }
         }
     }
+
+    fun updateRecyclerItems(){
+        viewModelScope.launch {
+            _articles.value = repository.getArticlesFromDB()
+        }
+    }
 }

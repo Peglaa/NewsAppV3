@@ -20,6 +20,7 @@ class NewsRecyclerAdapter (private val onClickListener: OnClickListener) :
         holder.itemView.setOnClickListener {
             onClickListener.onClick(article)
         }
+
         holder.bind(article)
     }
 

@@ -1,6 +1,7 @@
 package com.damir.stipancic.newsappv3.ui.fragments.article_detail_screen
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,20 +16,32 @@ class ArticleDetailViewModel(article: Article, private val repository : NewsRepo
     val selectedArticle: LiveData<Article>
         get() = _selectedArticle
 
+    private val _updateRecyclerOnBack = MutableLiveData<Boolean>()
+    val updateRecyclerOnBack: LiveData<Boolean>
+        get() = _updateRecyclerOnBack
+
     init {
+        _updateRecyclerOnBack.value = false
         _selectedArticle.value = article
     }
 
-    fun onSaveClicked(){
-        viewModelScope.launch {
-            try {
-                selectedArticle.value?.id?.let { repository.saveArticle(it) }
+    fun onSaveClicked() {
+        if (selectedArticle.value?.saved == false) {
+            viewModelScope.launch {
+                try {
+                    selectedArticle.value?.id?.let { repository.saveArticle(it) }
+                    _updateRecyclerOnBack.value = true
+                    //TODO: SHOW SNACKBAR
+                } catch (e: Exception) {
+                    Log.d("articleDetailsViewModel", "onSaveClickedFailed: ${e.message}")
+                    //TODO: SHOW SNACKBAR
+                }
             }
-            catch (e: Exception){
-                Log.d("articleDetailsViewModel", "onSaveClickedFailed: ${e.message}")
-            }
-        }
 
+        }
+        else{
+            //TODO: SHOW SNACKBAR
+        }
     }
 
 }

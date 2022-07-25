@@ -31,10 +31,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:layout_marginStart="10dp"
             tools:text="Article Title"
-            android:textColor="@color/black"
             android:textSize="20sp"
-            android:text="@{article.title}"
+            app:articleTitle="@{article.title}"
+            app:articleTitleColor="@{article.saved}"
             />
 
     </LinearLayout>

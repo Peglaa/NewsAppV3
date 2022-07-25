@@ -27,6 +27,7 @@ class NewsRepository(private val database: ArticleDatabase) {
                     "newsRepository",
                     "UNSAVED_COUNT: ${database.sleepDatabaseDao.getUnsavedRowCount()}"
                 )
+                //Limit database to max 10 entries, to coincide with the amount of news pulled from API
                 if (database.sleepDatabaseDao.getUnsavedRowCount() >= 20)
                     database.sleepDatabaseDao.deleteNotNeededArticles()
                 Log.d(

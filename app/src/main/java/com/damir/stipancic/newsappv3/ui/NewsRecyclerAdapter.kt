@@ -20,6 +20,8 @@ class NewsRecyclerAdapter (private val onClickListener: OnClickListener) :
         holder.itemView.setOnClickListener {
             onClickListener.onClick(article)
         }
+        if(article.saved)
+            holder.setIsRecyclable(false)
 
         holder.bind(article)
     }

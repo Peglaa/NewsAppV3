@@ -31,7 +31,7 @@ class ArticleDetailsFragment : Fragment() {
                 setBackStackData("updateRecycler", updateRecyclerOnBack)
             }
         }
-        
+
         return binding.root
     }
 

@@ -33,6 +33,7 @@ class LatestNewsFragment : Fragment() {
         })
 
         binding.latestNewsRecycler.addItemDecoration(DividerItemDecoration(binding.latestNewsRecycler.context, DividerItemDecoration.VERTICAL))
+        binding.latestNewsRecycler.setHasFixedSize(true)
 
         viewModel.navigateToClickedArticle.observe(viewLifecycleOwner) {
             if(null != it) {

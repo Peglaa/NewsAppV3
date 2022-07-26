@@ -1,6 +1,5 @@
 package com.damir.stipancic.newsappv3.ui.fragments.article_detail_screen
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,20 +26,14 @@ class ArticleDetailViewModel(article: Article, private val repository : NewsRepo
     fun onSaveClicked() {
         if (selectedArticle.value?.saved == false) {
             viewModelScope.launch {
-                try {
-                    selectedArticle.value?.id?.let { repository.saveArticle(it) }
-                    _updateRecyclerOnBack.value = true
-                    //TODO: SHOW SNACKBAR
-                } catch (e: Exception) {
-                    Log.d("articleDetailsViewModel", "onSaveClickedFailed: ${e.message}")
-                    //TODO: SHOW SNACKBAR
-                }
+                selectedArticle.value?.id?.let { repository.saveArticle(it) }
+                _updateRecyclerOnBack.value = true
             }
+        }
+    }
 
-        }
-        else{
-            //TODO: SHOW SNACKBAR
-        }
+    fun deleteArticle(article: Article) = viewModelScope.launch {
+        repository.deleteArticle(article)
     }
 
 }

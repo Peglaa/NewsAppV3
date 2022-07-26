@@ -8,7 +8,7 @@ import com.damir.stipancic.newsappv3.data.models.Article
 @TypeConverters(Converters::class)
 abstract class ArticleDatabase: RoomDatabase(){
 
-    abstract val sleepDatabaseDao: ArticleDao
+    abstract val articleDatabaseDao: ArticleDao
 
     companion object{
 

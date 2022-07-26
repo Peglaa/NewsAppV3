@@ -1,9 +1,6 @@
 package com.damir.stipancic.newsappv3.data.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.damir.stipancic.newsappv3.data.models.Article
 
 @Dao
@@ -12,7 +9,7 @@ interface ArticleDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertArticle(article: Article) : Long
 
-    @Query("SELECT * FROM articles WHERE saved = true")
+    @Query("SELECT * FROM articles WHERE saved = true ORDER BY id DESC")
     suspend fun getSavedArticles(): MutableList<Article>
 
     @Query("SELECT * FROM articles")
@@ -32,4 +29,7 @@ interface ArticleDao {
 
     @Query("UPDATE articles SET saved = true WHERE id = :id")
     suspend fun saveArticle(id: Long)
+
+    @Delete
+    suspend fun deleteArticle(article: Article)
 }

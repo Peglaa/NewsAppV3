@@ -83,8 +83,7 @@
             android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:contentDescription="@string/save_article_button"
-            android:onClick="@{() -> viewModel.onSaveClicked()}"/>
+            android:contentDescription="@string/save_article_button" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

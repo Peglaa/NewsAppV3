@@ -1,7 +1,6 @@
 package com.damir.stipancic.newsappv3.ui.fragments.article_detail_screen
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

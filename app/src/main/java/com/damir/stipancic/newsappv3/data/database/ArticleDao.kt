@@ -1,6 +1,5 @@
 package com.damir.stipancic.newsappv3.data.database
 
-import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -14,7 +13,7 @@ interface ArticleDao {
     suspend fun insertArticle(article: Article) : Long
 
     @Query("SELECT * FROM articles WHERE saved = true")
-    suspend fun getSavedArticles(): List<Article>
+    suspend fun getSavedArticles(): MutableList<Article>
 
     @Query("SELECT * FROM articles")
     suspend fun getAllArticles(): List<Article>

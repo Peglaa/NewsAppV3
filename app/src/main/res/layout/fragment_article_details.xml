@@ -18,10 +18,10 @@
         <ImageView
             android:id="@+id/article_detail_image"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="233dp"
+            android:scaleType="fitXY"
             android:contentDescription="@string/article_detail_image"
             app:imageUrl="@{viewModel.selectedArticle.urlToImage}"
-            app:layout_constraintDimensionRatio="1:0.565"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

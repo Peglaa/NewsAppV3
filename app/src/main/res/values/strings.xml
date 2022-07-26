@@ -7,4 +7,5 @@
     <string name="details">DETAILS</string>
     <string name="article_detail_image">Article detail image</string>
     <string name="save_article_button">save_article_button</string>
+    <string name="connection_status_image">connection_status_image</string>
 </resources>

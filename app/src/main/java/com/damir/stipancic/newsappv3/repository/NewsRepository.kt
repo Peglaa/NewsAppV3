@@ -46,7 +46,7 @@ class NewsRepository(private val database: ArticleDatabase) {
         database.sleepDatabaseDao.saveArticle(id)
     }
 
-    suspend fun getSavedArticles(): List<Article>{
+    suspend fun getSavedArticles(): MutableList<Article>{
         return database.sleepDatabaseDao.getSavedArticles()
     }
 }

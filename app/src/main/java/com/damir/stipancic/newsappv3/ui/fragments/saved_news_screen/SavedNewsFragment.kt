@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -13,11 +14,13 @@ import com.damir.stipancic.newsappv3.databinding.FragmentSavedNewsBinding
 import com.damir.stipancic.newsappv3.repository.NewsRepository
 import com.damir.stipancic.newsappv3.ui.NewsRecyclerAdapter
 
+
 class SavedNewsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false) //remove up arrow cause we are in bottom nav fragment
         val binding = FragmentSavedNewsBinding.inflate(inflater)
         val repository = NewsRepository(ArticleDatabase.getInstance(requireContext()))
         val viewModelFactory = SavedNewsViewModelFactory(repository)
@@ -26,9 +29,10 @@ class SavedNewsFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.savedNewsRecycler.adapter = NewsRecyclerAdapter(NewsRecyclerAdapter.OnClickListener {
+        val adapter = NewsRecyclerAdapter(NewsRecyclerAdapter.OnClickListener {
             viewModel.displayArticleDetails(it)
         })
+        binding.savedNewsRecycler.adapter = adapter
 
         binding.savedNewsRecycler.addItemDecoration(DividerItemDecoration(binding.savedNewsRecycler.context, DividerItemDecoration.VERTICAL))
         binding.savedNewsRecycler.setHasFixedSize(true)

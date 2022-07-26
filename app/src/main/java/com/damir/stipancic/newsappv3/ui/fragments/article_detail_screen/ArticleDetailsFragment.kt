@@ -20,6 +20,9 @@ class ArticleDetailsFragment : Fragment() {
         val article = ArticleDetailsFragmentArgs.fromBundle(arguments!!).selectedArticle
         val repository = NewsRepository(ArticleDatabase.getInstance(requireContext()))
 
+        if(article.saved)
+            binding.saveFab.visibility = View.GONE
+
         val viewModelFactory = ArticleDetailsViewModelFactory(article, repository)
         val viewModel = ViewModelProvider(this, viewModelFactory)[ArticleDetailViewModel::class.java]
 

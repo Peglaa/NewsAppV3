@@ -51,4 +51,6 @@ class NewsRepository(private val database: ArticleDatabase) {
 
     suspend fun deleteArticle(article: Article) = database.articleDatabaseDao.deleteArticle(article)
 
+    suspend fun insertArticle(article: Article) = database.articleDatabaseDao.insertArticle(article)
+
 }

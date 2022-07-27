@@ -22,8 +22,4 @@ class ArticleDetailViewModel(article: Article, private val repository : NewsRepo
                 selectedArticle.value?.id?.let { repository.saveArticle(it) }
             }
 
-    fun deleteArticle(article: Article) = viewModelScope.launch {
-        repository.deleteArticle(article)
-    }
-
 }

@@ -27,7 +27,6 @@ class SavedNewsFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory)[SavedNewsViewModel::class.java]
 
         binding.lifecycleOwner = this
-        binding.viewModel = viewModel
 
         val adapter = NewsRecyclerAdapter(NewsRecyclerAdapter.OnClickListener {
             viewModel.displayArticleDetails(it)
@@ -36,6 +35,10 @@ class SavedNewsFragment : Fragment() {
 
         binding.savedNewsRecycler.addItemDecoration(DividerItemDecoration(binding.savedNewsRecycler.context, DividerItemDecoration.VERTICAL))
         binding.savedNewsRecycler.setHasFixedSize(true)
+
+        viewModel.getSavedArticles().observe(viewLifecycleOwner){ savedArticles ->
+            adapter.submitList(savedArticles)
+        }
 
         viewModel.navigateToClickedArticle.observe(viewLifecycleOwner){
             it?.let {

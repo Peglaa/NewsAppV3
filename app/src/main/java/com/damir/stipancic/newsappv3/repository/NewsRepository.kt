@@ -1,6 +1,8 @@
 package com.damir.stipancic.newsappv3.repository
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
 import com.damir.stipancic.newsappv3.data.models.Article
 import com.damir.stipancic.newsappv3.data.network.NewsApi
@@ -38,19 +40,15 @@ class NewsRepository(private val database: ArticleDatabase) {
         }
     }
 
-    suspend fun getArticlesFromDB(): List<Article> {
-        return database.articleDatabaseDao.getLatestArticles()
-    }
+    fun getArticlesFromDB() = database.articleDatabaseDao.getLatestArticles()
 
-    suspend fun saveArticle(id: Long){
-        database.articleDatabaseDao.saveArticle(id)
-    }
 
-    suspend fun getSavedArticles(): MutableList<Article>{
-        return database.articleDatabaseDao.getSavedArticles()
-    }
+    suspend fun saveArticle(id: Long) = database.articleDatabaseDao.saveArticle(id)
 
-    suspend fun deleteArticle(article: Article){
-        database.articleDatabaseDao.deleteArticle(article)
-    }
+
+    fun getSavedArticles() = database.articleDatabaseDao.getSavedArticles()
+
+
+    suspend fun deleteArticle(article: Article) = database.articleDatabaseDao.deleteArticle(article)
+
 }

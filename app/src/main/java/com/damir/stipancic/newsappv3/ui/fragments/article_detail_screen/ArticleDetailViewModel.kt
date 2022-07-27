@@ -14,23 +14,13 @@ class ArticleDetailViewModel(article: Article, private val repository : NewsRepo
     val selectedArticle: LiveData<Article>
         get() = _selectedArticle
 
-    private val _updateRecyclerOnBack = MutableLiveData<Boolean>()
-    val updateRecyclerOnBack: LiveData<Boolean>
-        get() = _updateRecyclerOnBack
-
     init {
-        _updateRecyclerOnBack.value = false
         _selectedArticle.value = article
     }
 
-    fun onSaveClicked() {
-        if (selectedArticle.value?.saved == false) {
-            viewModelScope.launch {
+    fun onSaveClicked() = viewModelScope.launch {
                 selectedArticle.value?.id?.let { repository.saveArticle(it) }
-                _updateRecyclerOnBack.value = true
             }
-        }
-    }
 
     fun deleteArticle(article: Article) = viewModelScope.launch {
         repository.deleteArticle(article)

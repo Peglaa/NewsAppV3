@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
 import com.damir.stipancic.newsappv3.databinding.FragmentArticleDetailsBinding
 import com.damir.stipancic.newsappv3.repository.NewsRepository
-import com.damir.stipancic.newsappv3.setBackStackData
 import com.google.android.material.snackbar.Snackbar
 
 class ArticleDetailsFragment : Fragment() {
@@ -38,13 +37,6 @@ class ArticleDetailsFragment : Fragment() {
         }
 
         binding.viewModel = viewModel
-
-        viewModel.updateRecyclerOnBack.observe(viewLifecycleOwner){
-            if(it) {
-                val updateRecyclerOnBack = true
-                setBackStackData("updateRecycler", updateRecyclerOnBack)
-            }
-        }
 
         return binding.root
     }

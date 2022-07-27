@@ -18,11 +18,6 @@ class LatestNewsViewModel(private val repository : NewsRepository) : ViewModel()
     val apiStatus: LiveData<NewsApiStatus>
         get() = _apiStatus
 
-    //INTERNAL/EXTERNAL variables to store list of news articles
-    private val _articles = MutableLiveData<List<Article>>()
-    val articles: LiveData<List<Article>>
-        get() = _articles
-
     //INTERNAL/EXTERNAL variables to track onClick navigation
     private val _navigateToClickedArticle = MutableLiveData<Article>()
     val navigateToClickedArticle : LiveData<Article>
@@ -45,20 +40,15 @@ class LatestNewsViewModel(private val repository : NewsRepository) : ViewModel()
         viewModelScope.launch {
             try{
                 repository.refreshNews()
-                _articles.value = repository.getArticlesFromDB()
+                getLatestNewsFromDB()
                 _apiStatus.value = NewsApiStatus.SUCCESSFUL
             }
             catch(e: Exception) {
                 _apiStatus.value = NewsApiStatus.ERROR
-                _articles.value = ArrayList()
                 Log.d("latestNewsViewModel", "getLatestNews: ${e.message}")
             }
         }
     }
 
-    fun updateRecyclerItems(){
-        viewModelScope.launch {
-            _articles.value = repository.getArticlesFromDB()
-        }
-    }
+    fun getLatestNewsFromDB() = repository.getArticlesFromDB()
 }

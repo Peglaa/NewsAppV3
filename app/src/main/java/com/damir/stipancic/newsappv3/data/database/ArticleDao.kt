@@ -1,5 +1,6 @@
 package com.damir.stipancic.newsappv3.data.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.damir.stipancic.newsappv3.data.models.Article
 
@@ -10,13 +11,13 @@ interface ArticleDao {
     suspend fun insertArticle(article: Article) : Long
 
     @Query("SELECT * FROM articles WHERE saved = true ORDER BY id DESC")
-    suspend fun getSavedArticles(): MutableList<Article>
+    fun getSavedArticles(): LiveData<List<Article>>
 
     @Query("SELECT * FROM articles")
     suspend fun getAllArticles(): List<Article>
 
     @Query("SELECT * FROM articles ORDER BY createdAt DESC LIMIT 10")
-    suspend fun getLatestArticles(): List<Article>
+    fun getLatestArticles(): LiveData<List<Article>>
 
     @Query("SELECT COUNT(id) FROM articles WHERE saved = false")
     suspend fun getUnsavedRowCount(): Int

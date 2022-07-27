@@ -36,9 +36,6 @@ class SavedNewsFragment : Fragment() {
         })
         binding.savedNewsRecycler.adapter = adapter
 
-        binding.savedNewsRecycler.addItemDecoration(DividerItemDecoration(binding.savedNewsRecycler.context, DividerItemDecoration.VERTICAL))
-        //binding.savedNewsRecycler.setHasFixedSize(true)
-
         viewModel.getSavedArticles().observe(viewLifecycleOwner){ savedArticles ->
             adapter.submitList(savedArticles)
         }
@@ -65,10 +62,10 @@ class SavedNewsFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.absoluteAdapterPosition
                 val article = adapter.currentList[position]
-                viewModel.deleteArticle(article)
+                viewModel.unSaveArticle(article)
                 Snackbar.make(requireView(), "Successfully deleted article!", Snackbar.LENGTH_LONG).apply {
                     setAction("UNDO"){
-                        viewModel.insertArticle(article)
+                        viewModel.saveArticle(article)
                     }
                     show()
                 }

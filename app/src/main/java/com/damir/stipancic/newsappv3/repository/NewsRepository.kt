@@ -42,12 +42,11 @@ class NewsRepository(private val database: ArticleDatabase) {
 
     fun getArticlesFromDB() = database.articleDatabaseDao.getLatestArticles()
 
-
     suspend fun saveArticle(id: Long) = database.articleDatabaseDao.saveArticle(id)
 
+    suspend fun unSaveArticle(id: Long) = database.articleDatabaseDao.unSaveArticle(id)
 
     fun getSavedArticles() = database.articleDatabaseDao.getSavedArticles()
-
 
     suspend fun deleteArticle(article: Article) = database.articleDatabaseDao.deleteArticle(article)
 

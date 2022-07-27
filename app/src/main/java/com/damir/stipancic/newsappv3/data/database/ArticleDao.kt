@@ -31,6 +31,9 @@ interface ArticleDao {
     @Query("UPDATE articles SET saved = true WHERE id = :id")
     suspend fun saveArticle(id: Long)
 
+    @Query("UPDATE articles SET saved = false WHERE id = :id")
+    suspend fun unSaveArticle(id: Long)
+
     @Delete
     suspend fun deleteArticle(article: Article)
 }

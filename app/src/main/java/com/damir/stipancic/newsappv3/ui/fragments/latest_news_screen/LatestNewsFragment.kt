@@ -31,9 +31,6 @@ class LatestNewsFragment : Fragment() {
         })
         binding.latestNewsRecycler.adapter = adapter
 
-        binding.latestNewsRecycler.addItemDecoration(DividerItemDecoration(binding.latestNewsRecycler.context, DividerItemDecoration.VERTICAL))
-        binding.latestNewsRecycler.setHasFixedSize(true)
-
         viewModel.getLatestNewsFromDB().observe(viewLifecycleOwner) { articles ->
             adapter.submitList(articles)
         }

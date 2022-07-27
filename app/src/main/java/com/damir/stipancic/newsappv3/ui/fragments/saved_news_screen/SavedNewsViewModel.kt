@@ -28,11 +28,11 @@ class SavedNewsViewModel(private val repository: NewsRepository): ViewModel() {
 
     fun getSavedArticles() = repository.getSavedArticles()
 
-    fun deleteArticle(article: Article) = viewModelScope.launch {
-        repository.deleteArticle(article)
+    fun saveArticle(article: Article) = viewModelScope.launch {
+        article.id?.let { repository.saveArticle(it) }
     }
 
-    fun insertArticle(article: Article) = viewModelScope.launch {
-        repository.insertArticle(article)
+    fun unSaveArticle(article: Article) = viewModelScope.launch {
+        article.id?.let { repository.unSaveArticle(it) }
     }
 }

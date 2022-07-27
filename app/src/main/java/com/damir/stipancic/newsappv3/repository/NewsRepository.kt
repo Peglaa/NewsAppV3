@@ -13,8 +13,8 @@ class NewsRepository(private val database: ArticleDatabase) {
     suspend fun refreshNews(){
         withContext(Dispatchers.IO) {
             //check the age of the data in the DB and update if it's older than 1 hour
-            val latestEntry = database.articleDatabaseDao.getLatestEntry()
-            if((System.currentTimeMillis() - latestEntry.createdAt) > 0) {
+            val currentArticles = database.articleDatabaseDao.getAllArticles()
+            if(currentArticles.isEmpty() || (System.currentTimeMillis() - currentArticles[0].createdAt) > ONE_HOUR_IN_MILLIS) {
                 val response = NewsApi.retrofitService.getNews()
                 response.body()?.let { newsResponse ->
                     newsResponse.articles.forEach {

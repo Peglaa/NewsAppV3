@@ -41,7 +41,6 @@ class LatestNewsViewModel(private val repository : NewsRepository) : ViewModel()
             try{
                 repository.refreshNews()
                 _apiStatus.value = NewsApiStatus.SUCCESSFUL
-                getLatestNewsFromDB()
             }
             catch(e: Exception) {
                 _apiStatus.value = NewsApiStatus.ERROR

@@ -1,10 +1,7 @@
 package com.damir.stipancic.newsappv3.repository
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
-import com.damir.stipancic.newsappv3.data.models.Article
 import com.damir.stipancic.newsappv3.data.network.NewsApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -17,7 +14,7 @@ class NewsRepository(private val database: ArticleDatabase) {
         withContext(Dispatchers.IO) {
             //check the age of the data in the DB and update if it's older than 1 hour
             val latestEntry = database.articleDatabaseDao.getLatestEntry()
-            if((System.currentTimeMillis() - latestEntry.createdAt) > ONE_HOUR_IN_MILLIS) {
+            if((System.currentTimeMillis() - latestEntry.createdAt) > 0) {
                 val response = NewsApi.retrofitService.getNews()
                 response.body()?.let { newsResponse ->
                     newsResponse.articles.forEach {
@@ -47,9 +44,5 @@ class NewsRepository(private val database: ArticleDatabase) {
     suspend fun unSaveArticle(id: Long) = database.articleDatabaseDao.unSaveArticle(id)
 
     fun getSavedArticles() = database.articleDatabaseDao.getSavedArticles()
-
-    suspend fun deleteArticle(article: Article) = database.articleDatabaseDao.deleteArticle(article)
-
-    suspend fun insertArticle(article: Article) = database.articleDatabaseDao.insertArticle(article)
 
 }

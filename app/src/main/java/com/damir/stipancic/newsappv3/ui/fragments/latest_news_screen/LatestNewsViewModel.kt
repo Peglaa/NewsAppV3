@@ -19,8 +19,8 @@ class LatestNewsViewModel(private val repository : NewsRepository) : ViewModel()
         get() = _apiStatus
 
     //INTERNAL/EXTERNAL variables to track onClick navigation
-    private val _navigateToClickedArticle = MutableLiveData<Article>()
-    val navigateToClickedArticle : LiveData<Article>
+    private val _navigateToClickedArticle = MutableLiveData<Article?>()
+    val navigateToClickedArticle : LiveData<Article?>
         get() = _navigateToClickedArticle
 
     fun displayArticleDetails(article: Article) {
@@ -40,8 +40,8 @@ class LatestNewsViewModel(private val repository : NewsRepository) : ViewModel()
         viewModelScope.launch {
             try{
                 repository.refreshNews()
-                getLatestNewsFromDB()
                 _apiStatus.value = NewsApiStatus.SUCCESSFUL
+                getLatestNewsFromDB()
             }
             catch(e: Exception) {
                 _apiStatus.value = NewsApiStatus.ERROR

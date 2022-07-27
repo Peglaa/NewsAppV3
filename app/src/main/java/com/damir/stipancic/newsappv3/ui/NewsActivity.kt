@@ -15,7 +15,7 @@ import com.damir.stipancic.newsappv3.databinding.ActivityNewsBinding
 
 class NewsActivity : AppCompatActivity() {
 
-    lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

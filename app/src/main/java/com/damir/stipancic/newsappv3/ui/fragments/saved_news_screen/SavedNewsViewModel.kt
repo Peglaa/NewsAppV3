@@ -10,8 +10,8 @@ import kotlinx.coroutines.launch
 
 class SavedNewsViewModel(private val repository: NewsRepository): ViewModel() {
 
-    private val _navigateToClickedArticle = MutableLiveData<Article>()
-    val navigateToClickedArticle : LiveData<Article>
+    private val _navigateToClickedArticle = MutableLiveData<Article?>()
+    val navigateToClickedArticle : LiveData<Article?>
         get() = _navigateToClickedArticle
 
     fun displayArticleDetails(article: Article) {

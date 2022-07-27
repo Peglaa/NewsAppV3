@@ -6,19 +6,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.damir.stipancic.newsappv3.data.models.Article
-import com.damir.stipancic.newsappv3.ui.NewsRecyclerAdapter
 import com.damir.stipancic.newsappv3.ui.fragments.latest_news_screen.NewsApiStatus
-
-@BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Article>?) {
-    val adapter = recyclerView.adapter as NewsRecyclerAdapter
-    adapter.submitList(data)
-}
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?){

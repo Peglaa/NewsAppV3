@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
 import com.damir.stipancic.newsappv3.databinding.FragmentLatestNewsBinding
 import com.damir.stipancic.newsappv3.repository.NewsRepository

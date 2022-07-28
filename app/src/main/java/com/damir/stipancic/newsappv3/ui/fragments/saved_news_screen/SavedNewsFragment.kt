@@ -16,7 +16,6 @@ import com.damir.stipancic.newsappv3.repository.NewsRepository
 import com.damir.stipancic.newsappv3.ui.NewsRecyclerAdapter
 import com.google.android.material.snackbar.Snackbar
 
-
 class SavedNewsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -26,30 +25,33 @@ class SavedNewsFragment : Fragment() {
         val binding = FragmentSavedNewsBinding.inflate(inflater)
         val repository = NewsRepository(ArticleDatabase.getInstance(requireContext()))
         val viewModelFactory = SavedNewsViewModelFactory(repository)
-        val viewModel = ViewModelProvider(this, viewModelFactory)[SavedNewsViewModel::class.java]
-
-        binding.lifecycleOwner = this
-
+        val savedNewsViewModel = ViewModelProvider(this, viewModelFactory)[SavedNewsViewModel::class.java]
         val adapter = NewsRecyclerAdapter(NewsRecyclerAdapter.OnClickListener {
-            viewModel.displayArticleDetails(it)
+            savedNewsViewModel.displayArticleDetails(it)
         })
-        binding.savedNewsRecycler.adapter = adapter
 
-        viewModel.getSavedArticles().observe(viewLifecycleOwner){ savedArticles ->
-            adapter.submitList(savedArticles)
-            if(adapter.currentList.isEmpty())
-                binding.emptyListImage.visibility = View.VISIBLE
-            else
-                binding.emptyListImage.visibility = View.INVISIBLE
+        binding.apply {
+            lifecycleOwner = this@SavedNewsFragment.viewLifecycleOwner
+            savedNewsRecycler.adapter = adapter
         }
 
-        binding.savedNewsRecycler
+        savedNewsViewModel.apply {
+            //------------------------------
+            getSavedArticles().observe(viewLifecycleOwner){ savedArticles ->
+                adapter.submitList(savedArticles)
+                if(adapter.currentList.isEmpty())
+                    binding.emptyListImage.visibility = View.VISIBLE
+                else
+                    binding.emptyListImage.visibility = View.INVISIBLE
+            }
 
-        viewModel.navigateToClickedArticle.observe(viewLifecycleOwner){
-            it?.let {
-                this.findNavController().navigate(SavedNewsFragmentDirections.actionSavedNewsFragmentToArticleDetailsFragment(it))
-                viewModel.displayArticleDetailsComplete()
+            //------------------------------
+            navigateToClickedArticle.observe(viewLifecycleOwner){
+                it?.let {
+                    this@SavedNewsFragment.findNavController().navigate(SavedNewsFragmentDirections.actionSavedNewsFragmentToArticleDetailsFragment(it))
+                    savedNewsViewModel.displayArticleDetailsComplete()
 
+                }
             }
         }
 
@@ -68,10 +70,10 @@ class SavedNewsFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.absoluteAdapterPosition
                 val article = adapter.currentList[position]
-                viewModel.unSaveArticle(article)
+                savedNewsViewModel.unSaveArticle(article)
                 Snackbar.make(requireView(), "Successfully deleted article!", Snackbar.LENGTH_LONG).apply {
                     setAction("UNDO"){
-                        viewModel.saveArticle(article)
+                        savedNewsViewModel.saveArticle(article)
                     }
                     show()
                 }

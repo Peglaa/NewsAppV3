@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
 import com.damir.stipancic.newsappv3.databinding.FragmentLatestNewsBinding
 import com.damir.stipancic.newsappv3.repository.NewsRepository
@@ -20,27 +21,40 @@ class LatestNewsFragment : Fragment() {
         val repository = NewsRepository(ArticleDatabase.getInstance(requireContext()))
         val binding = FragmentLatestNewsBinding.inflate(inflater)
         val viewModelFactory = LatestNewsViewModelFactory(repository)
-        val viewModel = ViewModelProvider(this, viewModelFactory)[LatestNewsViewModel::class.java]
-
-        binding.lifecycleOwner = this.viewLifecycleOwner
-        binding.viewModel = viewModel
+        val latestNewsViewModel = ViewModelProvider(this, viewModelFactory)[LatestNewsViewModel::class.java]
 
         val adapter = NewsRecyclerAdapter(NewsRecyclerAdapter.OnClickListener{ article ->
-            viewModel.displayArticleDetails(article)
-        })
-        binding.latestNewsRecycler.adapter = adapter
-
-        viewModel.getLatestNewsFromDB().observe(viewLifecycleOwner) { articles ->
-            adapter.submitList(articles)
+            latestNewsViewModel.displayArticleDetails(article)
+        }).apply {
+            registerAdapterDataObserver(object: RecyclerView.AdapterDataObserver(){
+                override fun onChanged() {
+                    super.onChanged()
+                    binding.latestNewsRecycler.scrollToPosition(0)
+                }
+            })
         }
 
-        viewModel.navigateToClickedArticle.observe(viewLifecycleOwner) {
-            if(null != it) {
-                this.findNavController()
-                    .navigate(LatestNewsFragmentDirections.showArticleDetails(it))
+        binding.apply {
+            lifecycleOwner = this@LatestNewsFragment.viewLifecycleOwner
+            viewModel = latestNewsViewModel
+            latestNewsRecycler.adapter = adapter
+        }
 
-                viewModel.displayArticleDetailsComplete()
+        latestNewsViewModel.apply {
+            //-----------------------------------
+            getLatestNewsFromDB().observe(viewLifecycleOwner) { articles ->
+                adapter.submitList(articles)
+            }
 
+            //-----------------------------------
+            navigateToClickedArticle.observe(viewLifecycleOwner) {
+                if(null != it) {
+                    this@LatestNewsFragment.findNavController()
+                        .navigate(LatestNewsFragmentDirections.showArticleDetails(it))
+
+                    latestNewsViewModel.displayArticleDetailsComplete()
+
+                }
             }
         }
 

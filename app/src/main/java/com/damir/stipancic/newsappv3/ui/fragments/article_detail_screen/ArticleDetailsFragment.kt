@@ -18,27 +18,26 @@ class ArticleDetailsFragment : Fragment() {
                               savedInstanceState: Bundle?): View {
 
         val binding = FragmentArticleDetailsBinding.inflate(inflater)
-
         val article = ArticleDetailsFragmentArgs.fromBundle(requireArguments()).selectedArticle
         val repository = NewsRepository(ArticleDatabase.getInstance(requireContext()))
-
         val viewModelFactory = ArticleDetailsViewModelFactory(article, repository)
-        val viewModel = ViewModelProvider(this, viewModelFactory)[ArticleDetailViewModel::class.java]
-
-        binding.lifecycleOwner = this.viewLifecycleOwner
+        val articleDetailsViewModel = ViewModelProvider(this, viewModelFactory)[ArticleDetailViewModel::class.java]
 
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        if(article.saved)
-            binding.saveFab.visibility = View.GONE
+        binding.apply {
+            lifecycleOwner = this@ArticleDetailsFragment.viewLifecycleOwner
+            viewModel = articleDetailsViewModel
 
-        binding.saveFab.setOnClickListener {
-            viewModel.onSaveClicked()
-            Snackbar.make(requireView(), "Article saved successfully!", Snackbar.LENGTH_SHORT).show()
-            it.visibility = View.GONE
+            saveFab.setOnClickListener {
+                articleDetailsViewModel.onSaveClicked()
+                Snackbar.make(requireView(), "Article saved successfully!", Snackbar.LENGTH_SHORT).show()
+                it.visibility = View.GONE
+            }
+
+            if(article.saved)
+                saveFab.visibility = View.GONE
         }
-
-        binding.viewModel = viewModel
 
         return binding.root
     }

@@ -21,7 +21,7 @@ private const val API_KEY = BuildConfig.API_KEY
 interface NewsApiService {
 
     @GET("v2/top-headlines")
-    suspend fun getNews(@Query("source") source: String = SOURCE,
+    suspend fun getNews(@Query("sources") source: String = SOURCE,
                         @Query("apiKey") api_key: String = API_KEY): Response<NewsResponse>
 
     @GET("v2/everything")

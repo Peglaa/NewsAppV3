@@ -37,12 +37,19 @@ class SavedNewsFragment : Fragment() {
 
         viewModel.getSavedArticles().observe(viewLifecycleOwner){ savedArticles ->
             adapter.submitList(savedArticles)
+            if(adapter.currentList.isEmpty())
+                binding.emptyListImage.visibility = View.VISIBLE
+            else
+                binding.emptyListImage.visibility = View.INVISIBLE
         }
+
+        binding.savedNewsRecycler
 
         viewModel.navigateToClickedArticle.observe(viewLifecycleOwner){
             it?.let {
                 this.findNavController().navigate(SavedNewsFragmentDirections.actionSavedNewsFragmentToArticleDetailsFragment(it))
                 viewModel.displayArticleDetailsComplete()
+
             }
         }
 

@@ -19,7 +19,7 @@ class ArticleDetailsFragment : Fragment() {
 
         val binding = FragmentArticleDetailsBinding.inflate(inflater)
 
-        val article = ArticleDetailsFragmentArgs.fromBundle(arguments!!).selectedArticle
+        val article = ArticleDetailsFragmentArgs.fromBundle(requireArguments()).selectedArticle
         val repository = NewsRepository(ArticleDatabase.getInstance(requireContext()))
 
         val viewModelFactory = ArticleDetailsViewModelFactory(article, repository)

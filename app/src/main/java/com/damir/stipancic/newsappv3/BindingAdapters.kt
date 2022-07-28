@@ -12,7 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.damir.stipancic.newsappv3.ui.fragments.latest_news_screen.NewsApiStatus
 
 @BindingAdapter("imageUrl")
-fun bindImage(imgView: ImageView, imgUrl: String?){
+fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {
         val imgUri = it.toUri().buildUpon().scheme("https").build()
         Glide.with(imgView.context)
@@ -28,25 +28,21 @@ fun bindImage(imgView: ImageView, imgUrl: String?){
 }
 
 @BindingAdapter("articleTitle", "articleTitleColor")
-fun bindArticleTitle(txtView: TextView, title: String, saved: Boolean){
+fun bindArticleTitle(txtView: TextView, title: String, saved: Boolean) {
     txtView.text = title
-    if(saved)
+    if (saved)
         txtView.setTextColor(Color.parseColor("#127501"))
 }
 
-@BindingAdapter("newsApiStatus")
-fun bindStatus(statusImageView: ImageView, status: NewsApiStatus?) {
-    when (status) {
-        NewsApiStatus.LOADING -> {
-            statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.loading_animation)
-        }
-        NewsApiStatus.ERROR -> {
-            statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.ic_connection_error)
-        }
-        else -> {
-            statusImageView.visibility = View.GONE
-        }
-    }
+@BindingAdapter("newsApiStatus", "isDBEmpty")
+fun bindStatus(statusImageView: ImageView, status: NewsApiStatus?, isDBEmpty: Boolean) {
+    if (status == NewsApiStatus.LOADING) {
+        statusImageView.visibility = View.VISIBLE
+        statusImageView.setImageResource(R.drawable.loading_animation)
+    } else if (status == NewsApiStatus.ERROR && isDBEmpty) {
+        statusImageView.visibility = View.VISIBLE
+        statusImageView.setImageResource(R.drawable.ic_connection_error)
+    } else
+        statusImageView.visibility = View.GONE
 }
+

@@ -1,5 +1,6 @@
 package com.damir.stipancic.newsappv3.ui.fragments.search_news_screen
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,8 +31,14 @@ class SearchNewsViewModel(private val repository : NewsRepository): ViewModel() 
     }
 
     fun getSearchedNews(searchQuery: String) = viewModelScope.launch {
-        val response = repository.getSearchedNews(searchQuery, 1)
-        if(response.isSuccessful)
-            _searchResponse.value = response
+        try {
+            val response = repository.getSearchedNews(searchQuery, 1)
+            if(response.isSuccessful)
+                _searchResponse.value = response
+        }
+        catch (e: Exception){
+            Log.d("searchNewsViewModel", "getSearchedNews: NO INTERNET CONNECTION")
+        }
+
     }
 }

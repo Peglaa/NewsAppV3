@@ -18,6 +18,10 @@ class LatestNewsViewModel(private val repository : NewsRepository) : ViewModel()
     val apiStatus: LiveData<NewsApiStatus>
         get() = _apiStatus
 
+    private val _isDBEmpty = MutableLiveData<Boolean>()
+    val isDBEmpty: LiveData<Boolean>
+    get() = _isDBEmpty
+
     //INTERNAL/EXTERNAL variables to track onClick navigation
     private val _navigateToClickedArticle = MutableLiveData<Article?>()
     val navigateToClickedArticle : LiveData<Article?>
@@ -41,11 +45,14 @@ class LatestNewsViewModel(private val repository : NewsRepository) : ViewModel()
             try{
                 repository.refreshNews()
                 _apiStatus.value = NewsApiStatus.SUCCESSFUL
+                _isDBEmpty.value = false
             }
             catch(e: Exception) {
                 _apiStatus.value = NewsApiStatus.ERROR
                 Log.d("latestNewsViewModel", "getLatestNews: ${e.message}")
             }
+            if(repository.getArticlesFromDB().value?.isEmpty() == true)
+                _isDBEmpty.value = true
         }
     }
 

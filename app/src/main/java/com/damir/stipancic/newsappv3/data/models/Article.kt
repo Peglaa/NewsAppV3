@@ -20,6 +20,6 @@ data class Article(
     val url: String,
     val urlToImage: String,
     var saved: Boolean = false,
-    val createdAt: Long = System.currentTimeMillis()
+    var createdAt: Long = System.currentTimeMillis()
 ) : Parcelable
 

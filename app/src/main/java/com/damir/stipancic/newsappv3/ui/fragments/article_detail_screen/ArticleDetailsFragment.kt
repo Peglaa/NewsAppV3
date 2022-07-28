@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.damir.stipancic.newsappv3.R
 import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
 import com.damir.stipancic.newsappv3.databinding.FragmentArticleDetailsBinding
 import com.damir.stipancic.newsappv3.repository.NewsRepository
@@ -30,6 +32,14 @@ class ArticleDetailsFragment : Fragment() {
             viewModel = articleDetailsViewModel
 
             saveFab.setOnClickListener {
+                val previousFragment = findNavController().previousBackStackEntry?.destination?.id
+                if(previousFragment == R.id.searchNewsFragment) {
+                    article.saved = true
+                    article.createdAt = 0L
+                    articleDetailsViewModel.insertArticle(article)
+                }
+                else
+                    articleDetailsViewModel.onSaveClicked()
                 articleDetailsViewModel.onSaveClicked()
                 Snackbar.make(requireView(), "Article saved successfully!", Snackbar.LENGTH_SHORT).show()
                 it.visibility = View.GONE

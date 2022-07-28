@@ -9,4 +9,5 @@
     <string name="save_article_button">save_article_button</string>
     <string name="connection_status_image">connection_status_image</string>
     <string name="empty_list_image">empty_list_image</string>
+    <string name="start_typing_to_search">Start typing to search</string>
 </resources>

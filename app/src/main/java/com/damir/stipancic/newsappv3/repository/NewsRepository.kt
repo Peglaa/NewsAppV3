@@ -2,6 +2,7 @@ package com.damir.stipancic.newsappv3.repository
 
 import android.util.Log
 import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
+import com.damir.stipancic.newsappv3.data.models.Article
 import com.damir.stipancic.newsappv3.data.network.NewsApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -44,5 +45,9 @@ class NewsRepository(private val database: ArticleDatabase) {
     suspend fun unSaveArticle(id: Long) = database.articleDatabaseDao.unSaveArticle(id)
 
     fun getSavedArticles() = database.articleDatabaseDao.getSavedArticles()
+
+    suspend fun getSearchedNews(searchQuery: String, pageNumber: Int) = NewsApi.retrofitService.getSearchedNews(searchQuery, pageNumber = pageNumber)
+
+    suspend fun insertArticle(article: Article) = database.articleDatabaseDao.insertArticle(article)
 
 }

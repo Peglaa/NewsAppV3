@@ -45,7 +45,11 @@
         android:name="com.damir.stipancic.newsappv3.ui.fragments.article_detail_screen.ArticleDetailsFragment"
         android:label="ArticleDetailsFragment" >
         <argument
-            android:name="selectedArticle"
-            app:argType="com.damir.stipancic.newsappv3.data.models.Article" />
+            android:name="articleList"
+            app:argType="com.damir.stipancic.newsappv3.data.models.Article[]" />
+        <argument
+            android:name="position"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>

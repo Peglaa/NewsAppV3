@@ -3,11 +3,9 @@ package com.damir.stipancic.newsappv3.repository
 import android.util.Log
 import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
 import com.damir.stipancic.newsappv3.data.models.Article
-import com.damir.stipancic.newsappv3.data.models.NewsResponse
 import com.damir.stipancic.newsappv3.data.network.NewsApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Response
 
 private const val ONE_HOUR_IN_MILLIS = 3_600_000
 

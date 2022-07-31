@@ -18,6 +18,7 @@
         <entry key="..\:/Users/stipa/AndroidStudioProjects/NewsAppV3/app/src/main/res/drawable/ic_search.xml" value="0.1995" />
         <entry key="..\:/Users/stipa/AndroidStudioProjects/NewsAppV3/app/src/main/res/drawable/loading_img.xml" value="0.1995" />
         <entry key="..\:/Users/stipa/AndroidStudioProjects/NewsAppV3/app/src/main/res/layout/activity_news.xml" value="0.1766304347826087" />
+        <entry key="..\:/Users/stipa/AndroidStudioProjects/NewsAppV3/app/src/main/res/layout/article_details_pager_item.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/stipa/AndroidStudioProjects/NewsAppV3/app/src/main/res/layout/fragment_article_details.xml" value="0.33" />
         <entry key="..\:/Users/stipa/AndroidStudioProjects/NewsAppV3/app/src/main/res/layout/fragment_latest_news.xml" value="0.2" />
         <entry key="..\:/Users/stipa/AndroidStudioProjects/NewsAppV3/app/src/main/res/layout/fragment_saved_news.xml" value="0.19166666666666668" />

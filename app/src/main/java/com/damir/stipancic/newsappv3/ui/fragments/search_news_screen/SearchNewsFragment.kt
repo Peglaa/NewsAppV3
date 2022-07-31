@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
+import com.damir.stipancic.newsappv3.data.models.Article
 import com.damir.stipancic.newsappv3.databinding.FragmentSearchNewsBinding
 import com.damir.stipancic.newsappv3.repository.NewsRepository
 import com.damir.stipancic.newsappv3.ui.NewsRecyclerAdapter
-import com.damir.stipancic.newsappv3.ui.fragments.saved_news_screen.SavedNewsFragmentDirections
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -32,8 +32,10 @@ class SearchNewsFragment : Fragment() {
         val viewModelFactory = SearchNewsViewModelFactory(repository)
         val searchNewsViewModel =
             ViewModelProvider(this, viewModelFactory)[SearchNewsViewModel::class.java]
-        val adapter = NewsRecyclerAdapter(NewsRecyclerAdapter.OnClickListener {
-            searchNewsViewModel.displayArticleDetails(it)
+        val adapter = NewsRecyclerAdapter(NewsRecyclerAdapter.OnClickListener { article, position ->
+            val arguments = mutableListOf<Pair<List<Article>, Int>>()
+            arguments.add(Pair(article, position))
+            searchNewsViewModel.displayArticleDetails(arguments)
         })
         var job: Job? = null
 
@@ -62,7 +64,9 @@ class SearchNewsFragment : Fragment() {
         {
             it?.let {
                 this@SearchNewsFragment.findNavController().navigate(
-                    SearchNewsFragmentDirections.actionSearchNewsFragmentToArticleDetailsFragment(it)
+                    SearchNewsFragmentDirections.actionSearchNewsFragmentToArticleDetailsFragment(
+                        it[0].first.toTypedArray(),
+                        it[0].second )
                 )
                 searchNewsViewModel.displayArticleDetailsComplete()
 

@@ -10,12 +10,13 @@ import kotlinx.coroutines.launch
 
 class SavedNewsViewModel(private val repository: NewsRepository): ViewModel() {
 
-    private val _navigateToClickedArticle = MutableLiveData<Article?>()
-    val navigateToClickedArticle : LiveData<Article?>
+    //INTERNAL/EXTERNAL variables to track onClick navigation
+    private var _navigateToClickedArticle = MutableLiveData<MutableList<Pair<List<Article>, Int>>?>()
+    val navigateToClickedArticle : LiveData<MutableList<Pair<List<Article>, Int>>?>
         get() = _navigateToClickedArticle
 
-    fun displayArticleDetails(article: Article) {
-        _navigateToClickedArticle.value = article
+    fun displayArticleDetails(pair: MutableList<Pair<List<Article>, Int>>) {
+        _navigateToClickedArticle.value = pair
     }
 
     fun displayArticleDetailsComplete() {

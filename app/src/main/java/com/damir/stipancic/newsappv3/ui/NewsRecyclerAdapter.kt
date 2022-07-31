@@ -18,7 +18,7 @@ class NewsRecyclerAdapter (private val onClickListener: OnClickListener) :
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val article = getItem(position)
         holder.itemView.setOnClickListener {
-            onClickListener.onClick(article)
+            onClickListener.onClick(currentList, position)
         }
         if(article.saved)
             holder.setIsRecyclable(false)
@@ -44,7 +44,7 @@ class NewsRecyclerAdapter (private val onClickListener: OnClickListener) :
         }
     }
 
-    class OnClickListener(val clickListener: (article: Article) -> Unit) {
-        fun onClick(article: Article) = clickListener(article)
+    class OnClickListener(val clickListener: (articleList: List<Article>, position: Int) -> Unit) {
+        fun onClick(articleList: List<Article>, position: Int) = clickListener(articleList, position)
     }
 }

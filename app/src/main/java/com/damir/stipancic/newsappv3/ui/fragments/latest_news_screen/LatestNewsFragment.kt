@@ -47,8 +47,9 @@ class LatestNewsFragment : Fragment() {
         latestNewsViewModel.apply {
             //-----------------------------------
             getLatestNewsFromDB().observe(viewLifecycleOwner) { articles ->
-                adapter.submitList(articles)
-                Log.d("latestNewsFragment", "onArticleChange: ${adapter.currentList}")
+                adapter.submitList(articles){
+                    adapter.notifyDataSetChanged()
+                }
             }
 
             //-----------------------------------

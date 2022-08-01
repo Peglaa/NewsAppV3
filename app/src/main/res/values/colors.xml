@@ -11,5 +11,7 @@
     <color name="dark_orange">#AF6000</color>
     <color name="saved_title_green">#127501</color>
     <color name="gray">#FAFAFA</color>
+    <color name="black_high_emphasis">#DE000000</color>
+    <color name="article_description">#444444</color>
 
 </resources>

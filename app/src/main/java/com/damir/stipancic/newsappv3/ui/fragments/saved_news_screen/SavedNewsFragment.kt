@@ -42,10 +42,7 @@ class SavedNewsFragment : Fragment() {
         savedNewsViewModel.apply {
             //------------------------------
             getSavedArticles().observe(viewLifecycleOwner){ savedArticles ->
-                Log.d("savedNewsViewModel", "PREVIOUS LIST SIZE: ${adapter.currentList.size} ")
                 adapter.submitList(savedArticles) {
-                    savedNewsViewModel.getSavedArticles()
-                    Log.d("savedNewsViewModel", "LIST SUBMIT DONE: ${adapter.currentList.size} ")
                     adapter.notifyDataSetChanged()
 
                 }

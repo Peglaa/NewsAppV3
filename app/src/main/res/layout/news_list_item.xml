@@ -14,13 +14,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="@dimen/recycler_item_height"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/article_image"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
+            android:layout_width="@dimen/recycler_item_image_dimen"
+            android:layout_height="@dimen/recycler_item_height"
             android:adjustViewBounds="true"
             android:contentDescription="@string/article_image"
             android:scaleType="centerCrop"
@@ -31,9 +31,9 @@
             android:id="@+id/article_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:textSize="18sp"
+            android:layout_margin="@dimen/recycler_item_title_margin"
+            style="@style/Text.RecyclerItemTitle"
+            android:gravity="center_horizontal"
             app:articleTitle="@{article.title}"
             app:articleTitleColor="@{article.saved}"
             tools:text="Article Title" />

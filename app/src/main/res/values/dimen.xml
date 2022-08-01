@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="recycler_item_title">16sp</dimen>
-    <dimen name="article_title">20sp</dimen>
-    <dimen name="article_description">14sp</dimen>
+    <dimen name="recycler_item_title">20sp</dimen>
+    <dimen name="article_title">24sp</dimen>
+    <dimen name="article_description">20sp</dimen>
 
-    <dimen name="recycler_item_height">96dp</dimen>
-    <dimen name="recycler_item_image_dimen">96dp</dimen>
+    <dimen name="recycler_item_height">140dp</dimen>
     <dimen name="recycler_item_title_margin">16dp</dimen>
 
     <dimen name="article_text_margin_start">16dp</dimen>

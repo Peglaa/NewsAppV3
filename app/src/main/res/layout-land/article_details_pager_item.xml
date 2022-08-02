@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="article"
+            type="com.damir.stipancic.newsappv3.data.models.Article" />
+
+
+    </data>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/article_detail_image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:contentDescription="@string/article_detail_image"
+                android:scaleType="fitXY"
+                app:imageUrl="@{article.urlToImage}"
+                app:layout_constraintDimensionRatio="1.8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/article_detail_title"
+                style="@style/Text.ArticleTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/article_text_margin_start"
+                android:layout_marginTop="@dimen/article_text_margin_top"
+                android:text="@{article.title}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/article_detail_image"
+                tools:text="ARTICLE title" />
+
+            <TextView
+                android:id="@+id/article_detail_desc"
+                style="@style/Text.ArticleDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/article_text_margin_start"
+                android:layout_marginTop="@dimen/article_text_margin_top"
+                android:layout_marginEnd="@dimen/article_text_margin_start"
+                android:text="@{article.description}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/article_detail_title" />
+
+
+            <TextView
+                android:id="@+id/article_detail_src"
+                style="@style/Text.ArticleDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/article_text_margin_start"
+                android:layout_marginTop="@dimen/article_text_margin_top"
+                android:layout_marginEnd="@dimen/article_text_margin_start"
+                android:autoLink="web"
+                android:text="@{article.url}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/article_detail_desc" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/save_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:contentDescription="@string/save_article_button"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_save"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>

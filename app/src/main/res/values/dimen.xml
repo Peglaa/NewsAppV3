@@ -6,6 +6,7 @@
     <dimen name="article_description">20sp</dimen>
 
     <dimen name="recycler_item_height">140dp</dimen>
+    <dimen name="recycler_item_height_land">180dp</dimen>
     <dimen name="recycler_item_title_margin">16dp</dimen>
 
     <dimen name="article_text_margin_start">16dp</dimen>

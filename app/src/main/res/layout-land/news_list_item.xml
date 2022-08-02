@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="article"
+            type="com.damir.stipancic.newsappv3.data.models.Article" />
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/recycler_item_height_land"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <ImageView
+            android:id="@+id/article_image"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/recycler_item_height_land"
+            android:layout_weight="3.5"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/article_image"
+            app:imageUrl="@{article.urlToImage}"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/article_title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/recycler_item_title_margin"
+            android:layout_weight="6.25"
+            style="@style/Text.RecyclerItemTitle"
+            android:gravity="center_horizontal"
+            app:articleTitle="@{article.title}"
+            app:articleTitleColor="@{article.saved}"
+            tools:text="Article Title" />
+
+    </LinearLayout>
+
+
+</layout>

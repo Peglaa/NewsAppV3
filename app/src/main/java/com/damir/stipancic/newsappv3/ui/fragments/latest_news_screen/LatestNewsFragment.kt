@@ -1,12 +1,11 @@
 package com.damir.stipancic.newsappv3.ui.fragments.latest_news_screen
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
@@ -20,11 +19,11 @@ class LatestNewsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
-        val repository = NewsRepository(ArticleDatabase.getInstance(requireContext()))
-        val binding = FragmentLatestNewsBinding.inflate(inflater)
-        val viewModelFactory = LatestNewsViewModelFactory(repository)
-        val latestNewsViewModel = ViewModelProvider(this, viewModelFactory)[LatestNewsViewModel::class.java]
 
+        val binding = FragmentLatestNewsBinding.inflate(inflater)
+        val repository = NewsRepository(ArticleDatabase.getInstance(requireActivity()))
+        val viewModelFactory = LatestNewsViewModelFactory(repository)
+        val latestNewsViewModel: LatestNewsViewModel by viewModels(factoryProducer = { viewModelFactory })
         val adapter = NewsRecyclerAdapter(NewsRecyclerAdapter.OnClickListener{ article, position ->
             val arguments = mutableListOf<Pair<List<Article>, Int>>()
             arguments.add(Pair(article, position))

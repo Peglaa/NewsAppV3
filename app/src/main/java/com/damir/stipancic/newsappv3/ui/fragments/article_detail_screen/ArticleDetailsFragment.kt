@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
 import com.damir.stipancic.newsappv3.databinding.FragmentArticleDetailsBinding
 import com.damir.stipancic.newsappv3.repository.NewsRepository
@@ -18,11 +18,11 @@ class ArticleDetailsFragment : Fragment() {
                               savedInstanceState: Bundle?): View {
 
         val binding = FragmentArticleDetailsBinding.inflate(inflater)
-        val articleList = ArticleDetailsFragmentArgs.fromBundle(requireArguments()).articleList
-        val clickedPosition = ArticleDetailsFragmentArgs.fromBundle(requireArguments()).position
         val repository = NewsRepository(ArticleDatabase.getInstance(requireContext()))
         val viewModelFactory = ArticleDetailsViewModelFactory(repository)
-        val articleDetailsViewModel = ViewModelProvider(this, viewModelFactory)[ArticleDetailViewModel::class.java]
+        val articleDetailsViewModel: ArticleDetailViewModel by viewModels(factoryProducer = { viewModelFactory })
+        val articleList = ArticleDetailsFragmentArgs.fromBundle(requireArguments()).articleList
+        val clickedPosition = ArticleDetailsFragmentArgs.fromBundle(requireArguments()).position
         val articleAdapter = ArticleDetailsRecyclerAdapter(this, articleDetailsViewModel)
 
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -37,8 +37,6 @@ class ArticleDetailsFragment : Fragment() {
 
         return binding.root
     }
-
-
 
 }
 

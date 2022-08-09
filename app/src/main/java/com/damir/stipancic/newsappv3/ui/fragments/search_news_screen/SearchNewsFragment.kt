@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.damir.stipancic.newsappv3.data.database.ArticleDatabase
 import com.damir.stipancic.newsappv3.data.models.Article
@@ -28,10 +28,9 @@ class SearchNewsFragment : Fragment() {
 
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false) //remove up arrow cause we are in bottom nav fragment
         val binding = FragmentSearchNewsBinding.inflate(inflater)
-        val repository = NewsRepository(ArticleDatabase.getInstance(requireContext()))
+        val repository = NewsRepository(ArticleDatabase.getInstance(requireActivity()))
         val viewModelFactory = SearchNewsViewModelFactory(repository)
-        val searchNewsViewModel =
-            ViewModelProvider(this, viewModelFactory)[SearchNewsViewModel::class.java]
+        val searchNewsViewModel: SearchNewsViewModel by viewModels(factoryProducer = { viewModelFactory })
         val adapter = NewsRecyclerAdapter(NewsRecyclerAdapter.OnClickListener { article, position ->
             val arguments = mutableListOf<Pair<List<Article>, Int>>()
             arguments.add(Pair(article, position))
